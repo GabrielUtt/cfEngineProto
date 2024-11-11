@@ -1,4 +1,4 @@
-# Project Title
+# Banking Cash Flow Engine
 
 A prototype of a banking cash flow engine.
 
