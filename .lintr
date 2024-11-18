@@ -1,0 +1,14 @@
+linters: linters_with_defaults(
+    line_length_linter(120),
+	absolute_path_linter(), 			# check for absolute paths
+	assignment_linter(), 				# Enforce `<-` over `=`
+	commas_linter(),                  	# Check comma placement (no space before, space after)
+	object_length_linter(30),      		# Enforce object names to be <= 30 characters
+	object_name_linter(         		# Enforce snake_case for variable names
+      style = "snake_case"
+	),
+	spaces_left_parentheses_linter = lintr::spaces_left_parentheses_linter(),  # No space before parentheses in function calls
+	trailing_whitespace_linter = lintr::trailing_whitespace_linter(),          # No trailing whitespace
+	trailing_blank_lines_linter = lintr::trailing_blank_lines_linter()        # No trailing blank lines at end of file
+  ) # see vignette("lintr")
+encoding: "UTF-8"
