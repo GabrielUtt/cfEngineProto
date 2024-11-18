@@ -9,21 +9,11 @@
 
 # -------------------- PREREQUISITS/INPUTS --------------------
 
+# Language Setting
 Sys.setenv(LANG = "en")
-
-# libraries
-# if (!require(tidyverse)) install.packages("tidyverse")
-# library(tidyverse)
-# if (!require(lubridate)) install.packages("lubridate")
-# library(lubridate)
-# if (!require(timeDate)) install.packages("timeDate")
-# library(timeDate)
-
-# functions
-# source("functions.R")
+Sys.setlocale("LC_ALL", "en_US.UTF-8")
 
 # database connection / dbconn
-
 source("db_connect.R")
 
 # parameters:
@@ -89,7 +79,7 @@ if (dbExistsTable(
       start_dt date NOT NULL,
       maturity_dt date NOT NULL,
       customer_id text NOT NULL,
-      CONSTRAINT ", table_name, "_pkey PRIMARY KEY (ctrct_id), 
+      CONSTRAINT ", table_name, "_pkey PRIMARY KEY (ctrct_id),
       CONSTRAINT chk_ctrct_id_prefix CHECK (ctrct_id LIKE 'IBDP%'),
       CONSTRAINT chk_maturity_after_start CHECK (maturity_dt > start_dt)
     );")
@@ -137,4 +127,3 @@ if (dbExistsTable(
 }
 
 rm(table_name)
-
