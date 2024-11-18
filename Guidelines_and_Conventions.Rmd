@@ -22,9 +22,10 @@ Language should be English. Here are some ways to set the language to English in
 (*simplify if possible, not sure if best methods...*)
 
 ### Set System Language using code
-Set the R System language to English using the command Sys.setenv(LANG = "en"). This sets the language preference 
+Set the R System language to English using the command ```Sys.setenv(LANG = "en")```. This sets the language preference 
 in the system environment variable `LANG`to English. The `LANG`environment variable controls the default language used
-for messages, warnings, and errors in R.
+for messages, warnings, and errors in R. It seems tso be necessary to also set the locale to English, using the command
+```Sys.setlocale("LC_ALL", "en_US.UTF-8")``` to avoid problems, for example with ```styler```.
 
 ### Rconsole file
 
