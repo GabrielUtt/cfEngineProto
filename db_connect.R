@@ -4,7 +4,9 @@
 
 # -------------------- PREREQUISITS/INPUTS --------------------
 
+# Language Setting
 Sys.setenv(LANG = "en")
+Sys.setlocale("LC_ALL", "en_US.UTF-8")
 
 # libraries
 # if (!require(DBI)) install.packages("DBI")
@@ -27,7 +29,7 @@ if (!dir.exists("db")) {
 
 db_conn <- dbConnect(
   RSQLite::SQLite(),
-  dbname = file.path(getwd(), "db", "cfEngineProto_db.db")
+  dbname = file.path(getwd(), "db", "cfEngineProto.db")
 )
 
 

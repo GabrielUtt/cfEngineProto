@@ -9,17 +9,24 @@
 
 # -------------------- PREREQUISITS/INPUTS --------------------
 
+# settings
 Sys.setenv(LANG = "en")
 Sys.setlocale("LC_ALL", "en_US.UTF-8")
 
 # libraries
 if (!require(tidyverse)) install.packages("tidyverse")
 
-currencies <- c("EUR")
+# data
+currencies <- c("EUR") # list of available/possible currencies
+
+# database connection / dbconn
+if (!exists("db_conn")) {
+  source("db_connect.R")
+}
 
 # -------------------- SCRIPT --------------------
 
-source("db_connect.R")
+
 
 # -------------------- t_current_accounts --------------------
 
