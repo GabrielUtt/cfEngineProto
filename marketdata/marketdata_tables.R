@@ -5,6 +5,7 @@
 # -------------------- OUTLOOK/IDEAS --------------------
 
 # also add description for columns via SQL Code?
+# put table exist check and delete in function?
 
 # -------------------- PREREQUISITS/INPUTS --------------------
 
@@ -96,6 +97,33 @@ if (dbExistsTable(
   ))
 }
 
+rm(table_name)
 
 # Close db connection
 # DBI::dbDisconnect() # Generates error message, unable to find inherited method...???
+
+# -------------------- table t_marketdata_ts --------------------
+
+table_name <- "mktdat_t_marketdata_ts"
+
+if (dbExistsTable(
+  conn = db_conn,
+  name = table_name
+)) {
+  dbClearResult(dbSendQuery(
+    db_conn,
+    paste0("DELETE FROM ", table_name, ";") # no TRUNCATE for SQLite
+  ))
+} else {
+  dbClearResult(dbSendQuery(
+    db_conn,
+    paste0("CREATE TABLE ", table_name, " (
+      rate_date date NOT NULL,
+      rate_id text NOT NULL,
+      rate_value numeric NOT NULL,
+      CONSTRAINT pkey_", table_name, " PRIMARY KEY (rate_date, rate_id)
+    )")
+  )) # WITH (autovacuum_enabled=true) ?
+}
+
+rm(table_name)
