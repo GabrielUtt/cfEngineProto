@@ -9,9 +9,14 @@
 
 # -------------------- PREREQUISITS/INPUTS --------------------
 
-# Language Setting
+# clean environment
+rm(list = ls())
+
+# settings
 Sys.setenv(LANG = "en")
 Sys.setlocale("LC_ALL", "en_US.UTF-8")
+
+# libraries
 
 # database connection / dbconn
 source("db_connect.R")
@@ -45,7 +50,7 @@ if (dbExistsTable(
       currency varchar(3) NOT NULL,
       start_dt date NOT NULL,
       customer_id text NOT NULL,
-      CONSTRAINT ", table_name, "_pkey PRIMARY KEY (account_id)
+      CONSTRAINT pkey_", table_name, " PRIMARY KEY (account_id)
     );")
   ))
 }
@@ -79,7 +84,7 @@ if (dbExistsTable(
       start_dt date NOT NULL,
       maturity_dt date NOT NULL,
       customer_id text NOT NULL,
-      CONSTRAINT ", table_name, "_pkey PRIMARY KEY (ctrct_id),
+      CONSTRAINT pkey_", table_name, " PRIMARY KEY (ctrct_id),
       CONSTRAINT chk_ctrct_id_prefix CHECK (ctrct_id LIKE 'IBDP%'),
       CONSTRAINT chk_maturity_after_start CHECK (maturity_dt > start_dt)
     );")
@@ -121,7 +126,7 @@ if (dbExistsTable(
       start_dt date NOT NULL,
       maturity_dt date NOT NULL,
       customer_id text NOT NULL,
-      CONSTRAINT ", table_name, "_pkey PRIMARY KEY (ctrct_id)
+      CONSTRAINT pkey_", table_name, " PRIMARY KEY (ctrct_id)
     );")
   ))
 }
