@@ -2,22 +2,25 @@
 
 # set up marketdata tables
 
-# -------------------- OUTLOOK/IDEAS --------------------
+# -------------------- OUTLOOK/IDEAS/TDs --------------------
+
+# TD:
+# Check Whether truncate/delete works for SQLite table with FK
 
 # also add description for columns via SQL Code?
-# put table exist check and delete in function?
+# put table exist check and delete in function? Or just drop tables everytime before rewriting the here
+# Code: DROP TABLE IF EXISTS 'table_name'
 
 # -------------------- PREREQUISITS/INPUTS --------------------
+
+# clean environment
+rm(list = ls())
 
 # settings
 Sys.setenv(LANG = "en")
 Sys.setlocale("LC_ALL", "en_US.UTF-8")
 
 # libraries
-# if (!require(tidyverse)) install.packages("tidyverse")
-# library(tidyverse)
-# if (!require(lubridate)) install.packages("lubridate")
-# library(lubridate)
 
 # database connection / dbconn
 if (!exists("db_conn")) {
@@ -25,19 +28,13 @@ if (!exists("db_conn")) {
 }
 
 # parameters:
-# - ref_dt
-# if (!exists("ref_dt")) ref_dt <- today() # UTC default - need to set time zone?
 
 # -------------------- SCRIPT --------------------
 
 # -------------------- table t_rategroup --------------------
 
-# - rategroup_id: (maximum) 2-letter code for rategroup, PK
-# - rategroup_name: name of rategroup in snake case
-# - 3 letter code (either 'rel' or 'abs') for (relative vs. absolute) differencing of time series
-# - rategroup_desc: free text field
-
-# schema_table_name <- f_name_table(table = "t_rategroup", schema = "mktdat") # list
+# contains information about rategroups, i.e. groups of market data with specific common properties, like
+# FX data, equity data, interest rate data, etc.
 
 table_name <- "mktdat_t_rategroup"
 
@@ -98,9 +95,6 @@ if (dbExistsTable(
 }
 
 rm(table_name)
-
-# Close db connection
-# DBI::dbDisconnect() # Generates error message, unable to find inherited method...???
 
 # -------------------- table t_marketdata_ts --------------------
 

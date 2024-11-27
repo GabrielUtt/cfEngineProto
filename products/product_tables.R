@@ -9,9 +9,14 @@
 
 # -------------------- PREREQUISITS/INPUTS --------------------
 
-# Language Setting
+# clean environment
+rm(list = ls())
+
+# settings
 Sys.setenv(LANG = "en")
 Sys.setlocale("LC_ALL", "en_US.UTF-8")
+
+# libraries
 
 # database connection / dbconn
 source("db_connect.R")
